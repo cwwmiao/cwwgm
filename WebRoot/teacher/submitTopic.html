@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>上传课题</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+	
+    <link href="assets/css/select2.min.css" rel="stylesheet" >
+	<link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+        <div id="page-wrapper" >
+		   <div class="header"> 
+           <h1 class="page-header">
+                             我要出题  <small>完善题目信息</small>
+           </h1>
+		   </div>
+		
+            <div id="page-inner">
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form class="form-horizontal" id="form">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>课题名称</label>
+                                            <div class="col-sm-10">
+                                                <input  class="form-control" id="topicName" placeholder="课题名称" width="30px">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>课题来源</label>
+                                            <div class="col-sm-10">
+                                                <select class="selectbox" style="width: 200px" id="topicSrc">
+                                                <optgroup label="课题来源">
+                                                <option value="A">结合教师科研</option>
+                                                <option value="B">结合生产实际</option>
+                                                <option value="C">结合实验</option>
+                                                <option value="D">结合实际背景的专题研究</option>
+                                                <option value="E">无实际背景的专题研究</option>
+                                                </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>课题类别</label>
+                                            <div class="col-sm-10">
+                                                <select class="selectbox" style="width: 200px" id="topicType">
+                                                <optgroup label="课题类别">
+                                                <option value="A">学术论文</option>
+                                                <option value="B">调查报告</option>
+                                                <option value="C">工程设计</option>
+                                                <option value="D">实验</option>
+                                                <option value="E">理论计算</option>
+                                                </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red"> *</span>课题要求</label>
+                                            <div class="col-sm-10">
+                                                <input  class="form-control" id="requirement" placeholder="学生要求" width="30px">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>课题简介</label>&nbsp;
+                                            <textarea class="form-control" rows="5"  style="width:662px" id="introduction"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red"> *</span>人数限制</label>
+                                            <div class="col-sm-10">
+                                                <input  class="form-control" id="limitPerson" placeholder="人数限制(填入数字)" width="30px">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <input type="button" class="btn btn-default" onclick="update()" value="提交">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+
+			</div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script src="assets/js/util.js"></script>
+	<script>
+        var user= JSON.parse(sessionStorage.getItem("user"));//将json转换为对象
+        function update() {
+            var teacherid=user.teacherid;
+            var topicname=document.getElementById("topicName").value;
+            var topicsource=document.getElementById("topicSrc").value;
+            var topictype=document.getElementById("topicType").value;
+            var topicrequire=document.getElementById("requirement").value;
+            var topicintroduce=document.getElementById("introduction").value;
+            var topiclimit=document.getElementById("limitPerson").value;
+
+            var re=getResponse("/cwwgm/topicAction!addTopic",
+            		JSON.stringify({"teacherid":teacherid,"topicname":topicname,
+            			"topicsource":topicsource,"topictype":topictype,
+            			"topicrequire":topicrequire,"topicintroduce":topicintroduce,
+            			"topiclimit":topiclimit}))
+            console.log(re);
+            if(re.status=200)
+            {
+            	alert("提交完成");
+            }
+            else
+            {
+            	alert("提交失败");
+            }
+            document.getElementById("topicName").value="";
+            document.getElementById("topicSrc").value="A";
+            document.getElementById("topicType").value="A";
+            document.getElementById("requirement").value="";
+            document.getElementById("introduction").value="";
+            document.getElementById("limitPerson").value="";
+
+        }
+
+    </script>
+		
+   
+</body>
+</html>

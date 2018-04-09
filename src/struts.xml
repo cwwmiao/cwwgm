@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>  
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<!-- 默认访问action结尾的方式 -->
+	<constant name="struts.action.extension" value="action,do,,"/>
+	<!-- 修改默认文件上传的大小 -->
+	<constant name="struts.multipart.maxSize" value="2097152000"></constant>
+    <!-- strut标签使用的模板freemarker -->
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <!-- 表示Action由Spring来进行创建，可以直接使用Spring依赖注入来注入 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 定义异常处理界面 -->
+	
+	<package name="default" namespace="/" extends="json-default">
+	  <action name="teacherAction" class="com.gtm.action.TeacherAction">
+	  <interceptor-ref name="json"/>
+	   		<result type="json">
+	   		 <param name="root">json</param>  
+	   		</result>
+      </action>
+      <action name="topicAction" class="com.gtm.action.TopicAction">
+	  <interceptor-ref name="json"/>
+	   		<result type="json">
+	   		 <param name="root">json</param>  
+	   		</result>
+      </action>
+      <action name="studentAction" class="com.gtm.action.StudentAction">
+	  		<interceptor-ref name="json"/>
+	   		<result type="json">
+	   		 <param name="root">json</param>  
+	   		</result>
+      </action>
+      <action name="uploadAction" class="com.gtm.action.UploadAction">
+	   		<result type="json">
+	   		 <param name="root">json</param>  
+	   		</result>
+      </action>
+	</package>
+</struts>
+
+
+
+
+
+

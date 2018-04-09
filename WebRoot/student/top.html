@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>BRILLIANT Free Bootstrap Admin Template</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+</head>
+
+<body>
+    
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> 毕业生管理系统</strong></a>
+                
+                <div id="sideNav" href="">
+                    <i class="fa fa-bars icon"></i>
+                </div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <span id="realname" style="font-weight:bold;font-size:20px;"></span>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" onclick="loginout()" aria-expanded="false">
+                        <i class="fa fa-sign-out fa-fw" style="font-weight:bold;font-size:20px;"></i>
+                    </a>
+
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        
+        <!-- /. NAV SIDE  -->
+      
+        
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+     
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    
+    
+    <script src="assets/js/easypiechart.js"></script>
+    <script src="assets/js/easypiechart-data.js"></script>
+    
+
+    <script>
+        var user= JSON.parse(sessionStorage.getItem("user"));//将json转换为对象
+        document.getElementById("realname").innerHTML=user.name;
+        function  loginout() {
+            sessionStorage.clear();
+//            window.location.href="http://localhost:8080/login.html";
+//            alert(window.location.href);
+            parent.location.href="../login.html";
+        }
+
+    </script>
+</body>
+
+</html>

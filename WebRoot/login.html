@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>毕业生管理系统</title>
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <!--<title>Bootstrap Admin Template</title>-->
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
+
+</head>
+<body style="background-image:url(assets/img/banner.jpg);">
+<div class="login">
+	<h2>毕业生管理系统</h2>
+	<div class="login-top">
+		<h1>登录</h1>
+		<form style="text-align: center">
+			<input type="text" id="username" placeholder="请输入用户名" >
+			<input type="password" id="password"  placeholder="请输入密码">
+			<label><input name="usertype" type="radio" value="0" checked="checked"/>导师 </label>
+			<label><input name="usertype" type="radio" value="1" />学生 </label>
+	    </form>
+	    <br>
+	    <div class="forgot" style="text-align: center">
+			<div style="margin:0 auto">
+				<input  type="submit" value="登录" onclick="login();">
+				<a href="resetPwd.html">忘记密码</a>
+			</div>
+	    </div>
+	</div>
+<!-- 	<div class="login-bottom">
+		<h3>New User &nbsp;<a href="#">新用户注册</a>&nbsp Here</h3>
+	</div> -->
+</div>
+<!--ajax-->
+<script src="assets/js/jQuery-2.1.4.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script type="text/javascript">
+	function login() {
+        var username=document.getElementById("username").value;
+        var password=document.getElementById("password").value;
+        var usertype=0;
+        for (var i = 0; i < document.getElementsByName("usertype").length; i++)
+        {
+        	if(document.getElementsByName("usertype")[i].checked)
+        	{
+        		usertype=document.getElementsByName("usertype")[i].value;
+        	}
+        }
+        if(usertype==0)
+        {
+        	var re=getResponse('/cwwgm/teacherAction!login',JSON.stringify({"username":username,"password":password}));
+        	if(re.responseJSON==null){
+                 alert("用户名或密码错误！")
+     		}else{
+     			sessionStorage.setItem("user", JSON.stringify(re.responseJSON.teacher));
+            	window.location.href = "teacher/index.html";
+     		}
+        }
+        else
+        {
+        	var re=getResponse('/cwwgm/studentAction!login',JSON.stringify({"username":username,"password":password}));
+        	console.log(re);
+        	if(re.responseJSON==null){
+                 alert("用户名或密码错误！")
+     		}else{
+     			sessionStorage.setItem("user", JSON.stringify(re.responseJSON.student));
+            	window.location.href = "student/index.html";
+     		}
+        }
+       
+	}
+
+</script>
+
+</body>
+</html>

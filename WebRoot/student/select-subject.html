@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+
+    <title>Bootstrap Admin Template</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/select2.min.css" rel="stylesheet" >
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+<div id="page-wrapper">
+
+    <div class="header">
+        <h1 class="page-header">
+            我要选题
+        </h1>
+
+    </div>
+
+        
+            <div id="page-inner"> 
+               
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             选题列表
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <div class="row"><div class="col-sm-6"><div class="dataTables_length" id="dataTables-example_length">
+                                        <label>课题来源：
+                                            <select style="width: 200px" id="topicSrc">
+                                                <option value="">全部</option>
+                                                    <option value="A">结合教师科研</option>
+                                                    <option value="B">结合生产实际</option>
+                                                    <option value="C">结合实验</option>
+                                                    <option value="D">结合实际背景的专题研究</option>
+                                                    <option value="E">无实际背景的专题研究</option>
+                                            </select>
+                                        </label>
+                                        <label>课题类别：
+                                            <select style="width: 200px" id="topicType">
+                                                <option value="">全部</option>
+                                                    <option value="A">学术论文</option>
+                                                    <option value="B">调查报告</option>
+                                                    <option value="C">工程设计</option>
+                                                    <option value="D">实验</option>
+                                                    <option value="E">理论计算</option>
+                                            </select>
+                                        </label>
+                                    </div></div><div class="col-sm-6"><div id="dataTables-example_filter" class="dataTables_filter">
+
+                                        <label>
+                                            <input type="button" class="btn btn-default" onclick="show('0')" value="查询">
+                                        </label>
+                                        </div></div></div><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables" aria-describedby="dataTables-example_info">
+
+
+
+                                    <thead>
+                                        <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column ascending" style="width: 79.6667px;">课题名称</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 121.667px;">导师名</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 112.667px;">课题类别</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 112.667px;">课题来源</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 112.667px;">限制人数</th>
+										<th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 43.6667px;">选题</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data">
+                                        
+
+                                        </tbody>
+                                </table>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                                    <div id="pageGro" >
+                                                        <div id="pagelist">
+                                                            <ul class="pagination">
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="myModalLabel">选题详情</h4>
+            </div>
+    <div class="modal-body">
+        
+	<div class="form-group">
+        <label>课题名称：</label>
+        <span id="topicNameq"></span>
+    </div>
+    <div class="form-group">
+        <label>指导老师：</label>
+          <span id="teacherName"></span>
+    </div>
+    <div class="form-group">
+         <label>限制人数：</label>
+         <span id="limitPerson"></span>
+    </div>
+    <div class="form-group">
+        <label>课题类别：</label>
+        <span id="type"></span>
+    </div>
+     <div class="form-group">
+         <label>课题来源：</label>
+         <span id="src"></span>
+     </div>
+    <div class="form-group">
+        <label>课题描述：</label>
+        <span id="introduction"></span>
+    </div>
+    <div class="form-group">
+        <label>选题要求：</label>
+        <span id="requirement"></span>
+    </div>
+ </div>
+ <div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+  <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal" onclick="apply()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>申请</button>
+  <!--<button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>撤销申请</button>-->
+ </div>
+ </div>
+ </div>
+ </div>
+<!--<script type="text/javascript">-->
+<!--function showdialog(){-->
+    <!--$('#myModal').modal();-->
+<!--}-->
+<!--</script>-->
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+<script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- Custom Js -->
+
+    <!--ajax-->
+<script src="assets/js/jQuery-2.1.4.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/pageGroup.js"></script>
+<script>
+    var pageCount=0;
+    var pageSize=8;
+    var pageNum=0;
+    /*
+    var re=getResponse('/user/findTeacher');
+    var tmp = '<option value="" selected="selected">全部</option>';
+    for (var i = 0; i < re.responseJSON.length; i++) {
+        tmp += '<option value='+re.responseJSON[i].id+'>'
+            + re.responseJSON[i].realname + '</option>';
+    }
+    document.getElementById("teachers").innerHTML = tmp;
+    */
+    show(pageNum);
+    genPageList(pageCount,pageSize);
+    function show(pageNum) {
+        var topicsource=document.getElementById("topicSrc").value;
+        var topictype=document.getElementById("topicType").value;
+        var tablere=getResponse("/cwwgm/topicAction!findalltopic",
+        		JSON.stringify({"topicsource":topicsource,"topictype":topictype,"pageNum":pageNum}));
+        console.log(tablere);
+        pageCount=tablere.responseJSON.topicPage.pageCount;
+        pageSize=tablere.responseJSON.topicPage.pageSize;
+        var tmp="";
+        for(var i=0;i<tablere.responseJSON.topicPage.objs.length;i++){
+            if(i%2==0){
+                tmp+='<tr class="gradeA odd">';
+                tmp+='<td class="sorting_1">'+tablere.responseJSON.topicPage.objs[i].topicname+'</td>'
+                    +'<td class="center">'+tablere.responseJSON.topicPage.objs[i].teachername+'</td>'
+                    +'<td class="center">'+showTopicType(tablere.responseJSON.topicPage.objs[i].topictype)+'</td>'
+                    +'<td class="center">'+showTopicSrc(tablere.responseJSON.topicPage.objs[i].topicsource)+'</td>'
+                    +'<td class="center">'+tablere.responseJSON.topicPage.objs[i].realnum+'/'+tablere.responseJSON.topicPage.objs[i].topiclimit+'</td>'
+                    +'<td class="center"><a href="#" class="btn btn-warning" onclick="showdialog(\''+tablere.responseJSON.topicPage.objs[i].topicid+'\',\''+tablere.responseJSON.topicPage.objs[i].teachername+'\')" data-toggle="modal" data-target="#myModal">选题</a></td>'
+                    +'</tr>';
+            }
+            else{
+                tmp+='<tr class="gradeA even">';
+                tmp+='<td class="sorting_1">'+tablere.responseJSON.topicPage.objs[i].topicname+'</td>'
+                +'<td class="center">'+tablere.responseJSON.topicPage.objs[i].teachername+'</td>'
+                +'<td class="center">'+showTopicType(tablere.responseJSON.topicPage.objs[i].topictype)+'</td>'
+                +'<td class="center">'+showTopicSrc(tablere.responseJSON.topicPage.objs[i].topicsource)+'</td>'
+                +'<td class="center">'+tablere.responseJSON.topicPage.objs[i].realnum+'/'+tablere.responseJSON.topicPage.objs[i].topiclimit+'</td>'
+                +'<td class="center"><a href="#" class="btn btn-warning" onclick="showdialog(\''+tablere.responseJSON.topicPage.objs[i].topicid+'\',\''+tablere.responseJSON.topicPage.objs[i].teachername+'\')" data-toggle="modal" data-target="#myModal">选题</a></td>'
+                +'</tr>';
+            }
+        }
+        document.getElementById("data").innerHTML=tmp;
+    }
+    function showTopicSrc(val){
+        if(val=='A')
+            return "结合教师科研";
+        if(val=='B')
+            return "结合生产实际";
+        if(val=='C')
+            return "结合实验";
+        if(val=='D')
+            return "结合实际背景的专题研究";
+        if(val=='E')
+            return "无实际背景的专题研究";
+    }
+    function showTopicType(val) {
+        if(val=='A')
+            return "学术论文";
+        if(val=='B')
+            return "调查报告";
+        if(val=='C')
+            return "工程设计";
+        if(val=='D')
+            return "实验";
+        if(val=='E')
+            return "理论计算";
+    }
+
+
+</script>
+<script>
+    var topicid="";
+    function showdialog(id,name) {
+    	var re=getResponse('topicAction!findtopicbyid',JSON.stringify({"topicid":id}));
+        console.log(re);
+        document.getElementById("topicNameq").innerHTML=re.responseJSON.topic.topicname;
+        document.getElementById("teacherName").innerHTML=name;
+        document.getElementById("type").innerHTML=parseType(re.responseJSON.topic.topictype);
+        document.getElementById("introduction").innerHTML=re.responseJSON.topic.topicintroduce;
+        document.getElementById("requirement").innerHTML=re.responseJSON.topic.topicrequire;
+        document.getElementById("src").innerHTML=parseSrc(re.responseJSON.topic.topicsource);
+        document.getElementById("limitPerson").innerHTML=re.responseJSON.topic.topiclimit;
+        topicid=id;
+        tmpid=id;
+    }
+
+    function apply() {
+        var user= JSON.parse(sessionStorage.getItem("user"));//将json转换为对象
+        var studentid=user.studentid;
+        var reUser=getResponse("/cwwgm/studentAction!apply",
+        		JSON.stringify({"studentid":studentid,"topicid":topicid}));
+        console.log(reUser);
+        if(reUser.responseJSON==null){
+            alert("申请失败！")
+		}else{
+			alert(reUser.responseJSON.apply);
+		}
+    }
+</script>
+
+</body>
+</html>
