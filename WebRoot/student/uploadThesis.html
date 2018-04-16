@@ -93,20 +93,7 @@ function submitaction(){
 	console.log(formData.get("file"));
 	var re=getResponse("uploadAction!uploadthesis",formData,"multipart/form-data")
 	alert("添加成功");
-	/*
-	$.ajax({  
-		url: 'studentAction!uploadthesis' ,
-		//url: '/cwwgm/upload/uploadthesis',
-		type: 'POST',
-		data:
-		{
-			username:"nihao"
-		},  
-		success: function (data) {   
-		  	 alert("添加成功！");  
-		}, error: function (returndata) {}  
-		}); 
-	*/
+	
 }
 
 
